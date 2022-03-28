@@ -1,9 +1,10 @@
 import React from 'react';
 import LivroForm from './LivroForm';
 
-const AdicionaLivro = () => {
+const AdicionaLivro = ({ history, livros, setLivros }) => {
     const handleOnSubmit = (livro) => {
-        console.log(livro);
+        setLivros([livro, ...livros]);
+        history.push('/');
     };
 
     return (

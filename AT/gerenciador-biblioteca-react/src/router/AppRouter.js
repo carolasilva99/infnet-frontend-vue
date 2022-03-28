@@ -3,8 +3,11 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Header from '../components/Header';
 import AdicionaLivro from '../components/AdicionaLivro';
 import ListagemLivros from '../components/ListagemLivros';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const AppRouter = () => {
+    const [livros, setLivros] = useLocalStorage('livros', []);
+
     return (
         <BrowserRouter>
             <div>
@@ -12,7 +15,12 @@ const AppRouter = () => {
                 <div className="main-content">
                     <Switch>
                         <Route component={ListagemLivros} path="/" exact={true} />
-                        <Route component={AdicionaLivro} path="/adicionar" />
+                        <Route
+                            render={(props) => (
+                                <AdicionaLivro {...props} livros={livros} setLivros={setLivros} />
+                            )}
+                            path="/adicionar"
+                        />
                     </Switch>
                 </div>
             </div>
