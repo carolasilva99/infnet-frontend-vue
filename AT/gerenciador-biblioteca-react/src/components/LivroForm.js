@@ -18,6 +18,8 @@ const LivroForm = (props) => {
         const values = [nome, autor, categoria];
         let errorMsg = '';
 
+        console.log(values);
+
         const todosOsCamposPreenchidos = values.every((campo) => {
             const valor = `${campo}`.trim();
             return valor !== '' && valor !== '0';
@@ -33,7 +35,7 @@ const LivroForm = (props) => {
             };
             props.handleOnSubmit(livro);
 
-        } 
+        }
         else {
             errorMsg = 'Preencha todos os campos!';
         }
@@ -43,7 +45,7 @@ const LivroForm = (props) => {
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        
+
         switch (name) {
             case 'quantity':
                 if (value === '' || parseInt(value) === +value) {
@@ -97,14 +99,23 @@ const LivroForm = (props) => {
                 </Form.Group>
                 <Form.Group controlId="categoria">
                     <Form.Label>Categoria</Form.Label>
-                    <Form.Control
+                    <Form.Control as="select"
                         className="input-control"
-                        type="text"
+                        name="categoria"
+                        value={categoria}
+                        onChange={handleInputChange}>
+                        <option value="Suspense">Suspense</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Drama">Drama</option>
+                    </Form.Control>
+                    {/* <Form.Control
+                        className="input-control"
+                        type="select"
                         name="categoria"
                         value={categoria}
                         placeholder="Categoria"
                         onChange={handleInputChange}
-                    />
+                    /> */}
                 </Form.Group>
                 <Button variant="primary" type="submit" className="submit-btn">
                     Cadastrar
