@@ -46,29 +46,10 @@ const LivroForm = (props) => {
     const handleInputChange = (event) => {
         const { name, value } = event.target;
 
-        switch (name) {
-            case 'quantity':
-                if (value === '' || parseInt(value) === +value) {
-                    setLivro((prevState) => ({
-                        ...prevState,
-                        [name]: value
-                    }));
-                }
-                break;
-            case 'price':
-                if (value === '' || value.match(/^\d{1,}(\.\d{0,2})?$/)) {
-                    setLivro((prevState) => ({
-                        ...prevState,
-                        [name]: value
-                    }));
-                }
-                break;
-            default:
-                setLivro((prevState) => ({
-                    ...prevState,
-                    [name]: value
-                }));
-        }
+        setLivro((prevState) => ({
+            ...prevState,
+            [name]: value
+        }));
     };
 
     return (
@@ -104,6 +85,7 @@ const LivroForm = (props) => {
                         name="categoria"
                         value={categoria}
                         onChange={handleInputChange}>
+                        <option>Selecione..</option>
                         <option value="Suspense">Suspense</option>
                         <option value="Romance">Romance</option>
                         <option value="Drama">Drama</option>
