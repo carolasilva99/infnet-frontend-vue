@@ -108,14 +108,6 @@ const LivroForm = (props) => {
                         <option value="Romance">Romance</option>
                         <option value="Drama">Drama</option>
                     </Form.Control>
-                    {/* <Form.Control
-                        className="input-control"
-                        type="select"
-                        name="categoria"
-                        value={categoria}
-                        placeholder="Categoria"
-                        onChange={handleInputChange}
-                    /> */}
                 </Form.Group>
                 <Button variant="primary" type="submit" className="submit-btn">
                     Cadastrar
