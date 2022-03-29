@@ -21,21 +21,23 @@ const Livro = ({
     const history = useHistory();
     
     return (
-        <Card style={{ width: '18rem' }} className="book">
+        <Card className="livro mb-3 mt-5">
             <Card.Body>
-                <Card.Title className="book-title">{nome}</Card.Title>
-                <div className="book-details">
+                <Card.Title className="nome-livro">{nome}</Card.Title>
+                <div className="livro-detalhes">
                     <div>Id: {id}</div>
                     <div>Autor: {autor}</div>
                     <div>Categoria: {categoria} </div>
                     <div>Data cadastro: {dataAtualFormatada(new Date(dataCadastro))}</div>
                 </div>
-                <Button variant="primary" onClick={() => history.push(`/editar/${id}`)}>
-                    Editar
-                </Button>{' '}
-                <Button variant="danger" onClick={() => handleExclusaoLivro(id)}>
-                    Excluir
-                </Button>
+                <div className="botoes-livro mt-3">
+                    <Button variant="primary" onClick={() => history.push(`/editar/${id}`)}>
+                        Editar
+                    </Button>{' '}
+                    <Button variant="danger" onClick={() => handleExclusaoLivro(id)}>
+                        Excluir
+                    </Button>
+                </div>
             </Card.Body>
         </Card>
     );

@@ -1,20 +1,21 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 
 const Header = () => {
     return (
-        <header>
-            <h1>Gerenciador de Biblioteca</h1>
-            <hr />
-            <div className="links">
-                <NavLink to="/" className="link" activeClassName="active" exact>
-                    Livros
-                </NavLink>
-                <NavLink to="/adicionar" className="link" activeClassName="active">
-                    Adicionar Livro
-                </NavLink>
-            </div>
-        </header>
+        <Navbar bg="dark" variant="dark" expand="lg">
+            <Container>
+                <Navbar.Brand href="/">Gerenciador de Biblioteca</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="me-auto">
+                        <Nav.Link href="/">Listagem</Nav.Link>
+                        <Nav.Link href="/adicionar">Adicionar</Nav.Link>
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
     );
 };
 

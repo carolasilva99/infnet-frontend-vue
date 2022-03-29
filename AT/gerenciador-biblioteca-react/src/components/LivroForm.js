@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Container } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 
 const LivroForm = (props) => {
@@ -11,14 +11,13 @@ const LivroForm = (props) => {
     });
 
     const [mensagemErro, setMensagemErro] = useState('');
+
     const { nome, autor, categoria } = livro;
 
     const handleOnSubmit = (event) => {
         event.preventDefault();
         const values = [nome, autor, categoria];
         let errorMsg = '';
-
-        console.log(values);
 
         const todosOsCamposPreenchidos = values.every((campo) => {
             const valor = `${campo}`.trim();
@@ -53,10 +52,12 @@ const LivroForm = (props) => {
     };
 
     return (
-        <div className="main-form">
-            {mensagemErro && <p className="errorMsg">{mensagemErro}</p>}
+        <Container class="m-5">
+            {props.livro && <h2 class="mb-5 mt-5">Editar Livro</h2>}
+            {!props.livro && <h2 class="mb-5 mt-5">Adicionar Livro</h2>}
+            {mensagemErro && <p className="mensagem-erro">{mensagemErro}</p>}
             <Form onSubmit={handleOnSubmit}>
-                <Form.Group controlId="name">
+                <Form.Group controlId="nome">
                     <Form.Label>Nome</Form.Label>
                     <Form.Control
                         className="input-control"
@@ -66,6 +67,7 @@ const LivroForm = (props) => {
                         placeholder="Nome do livro"
                         onChange={handleInputChange}
                     />
+                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group controlId="autor">
                     <Form.Label>Autor</Form.Label>
@@ -91,11 +93,11 @@ const LivroForm = (props) => {
                         <option value="Drama">Drama</option>
                     </Form.Control>
                 </Form.Group>
-                <Button variant="primary" type="submit" className="submit-btn">
+                <Button variant="primary" type="submit" className="submit-btn pull-right">
                     Cadastrar
                 </Button>
             </Form>
-        </div>
+        </Container>
     );
 };
 
