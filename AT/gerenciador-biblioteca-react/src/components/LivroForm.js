@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const LivroForm = (props) => {
     const [livro, setLivro] = useState({
-        nome: props.livro ? props.livro.livroname : '',
+        nome: props.livro ? props.livro.nome : '',
         autor: props.livro ? props.livro.autor : '',
         categoria: props.livro ? props.livro.categoria : '',
         dataCadastro: props.livro ? props.livro.dataCadastro : ''

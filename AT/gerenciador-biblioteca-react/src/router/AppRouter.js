@@ -1,9 +1,10 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Header from '../components/Header';
 import AdicionaLivro from '../components/AdicionaLivro';
 import ListagemLivros from '../components/ListagemLivros';
 import useLocalStorage from '../hooks/useLocalStorage';
+import EditarLivro from '../components/EditarLivro';
 
 const AppRouter = () => {
     const [livros, setLivros] = useLocalStorage('livros', []);
@@ -27,6 +28,13 @@ const AppRouter = () => {
                             )}
                             path="/adicionar"
                         />
+                        <Route
+                            render={(props) => (
+                                <EditarLivro {...props} livros={livros} setLivros={setLivros} />
+                            )}
+                            path="/editar/:id"
+                        />
+                        <Route component={() => <Redirect to="/" />} />
                     </Switch>
                 </div>
             </div>
