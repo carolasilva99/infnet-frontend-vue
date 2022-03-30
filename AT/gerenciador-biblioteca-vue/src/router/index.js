@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import ListagemLivros from "../components/ListagemLivros.vue";
-import Livro from "../components/Livro.vue";
+import EditarLivro from "../components/EditarLivro.vue";
 import AdicionarLivro from "../components/AdicionarLivro.vue";
 
 const router = createRouter({
@@ -14,8 +14,8 @@ const router = createRouter({
     },
     {
       path: "/livros/:id",
-      name: "livros-detalhes",
-      component: () => Livro,
+      name: "editar",
+      component: () => EditarLivro,
     },
     {
       path: "/adicionar",

@@ -14,7 +14,7 @@
                                         ID
                                     </th>
                                     <th>
-                                        Nome
+                                        Título
                                     </th>
                                     <th>
                                         Autor
@@ -32,7 +32,7 @@
                                             {{ livro.id }}
                                         </td>
                                         <td>
-                                            {{ livro.nome }}
+                                            {{ livro.titulo }}
                                         </td>
                                         <td>
                                             {{ livro.autor }}
@@ -77,7 +77,7 @@ export default {
     methods: {
         editar(livro) {
             this.$router.push({
-                name: "editar-livro",
+                name: "editar",
                 params: {
                     id: livro.id
                 }
