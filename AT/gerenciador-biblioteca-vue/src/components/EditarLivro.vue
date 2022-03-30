@@ -36,44 +36,24 @@
                 <option value="SUSPENSE">Suspense</option>
             </select>
         </div>
-        <button @click="atualizar" class="btn btn-success">Atualizar</button>
+        <button @click="atualizar(livro.id, livro)" class="btn btn-success">Atualizar</button>
     </div>
     
 </template>
 <script>
-import LivrosDataService from "../services/LivrosDataService";
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
     name: "editar",
-    data() {
-        return {
-            livro: null,
-            sucesso: false
-        };
+    created() {
+        this.sucesso = false;
+        console.log(this.buscar(this.$route.params.id));
     },
     methods: {
-        buscar(id) {
-            LivrosDataService.buscar(id)
-                .then(response => {
-                    this.livro = response.data;
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        },
-        atualizar() {
-            LivrosDataService.atualizar(this.livro.id, this.livro)
-                .then(response => {
-                    this.sucesso = true;
-                })
-                .catch(e => {
-                    console.log(e);
-                });
-        }
+        ...mapActions(["buscar", "atualizar"])
     },
-    mounted() {
-        this.sucesso = false;
-        this.buscar(this.$route.params.id);
+    computed: {
+        ...mapGetters(["livro"])
     }
 };
 

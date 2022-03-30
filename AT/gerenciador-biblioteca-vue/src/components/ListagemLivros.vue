@@ -45,7 +45,7 @@
                                         </td>
                                         <td>
                                             <button class="btn btn-success mr-3" @click="editar(livro)">Editar</button>
-                                            <button class="btn btn-danger" @click="excluir(livro)">Excluir</button>
+                                            <button class="btn btn-danger" @click="excluir(livro.id)">Excluir</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -59,22 +59,15 @@
 </template>
 
 <script>
-import LivrosDataService from "../services/LivrosDataService";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
     name: "listagem-livros",
-    data() {
-        return {
-            livros: []
-        };
-    },
     created() {
-        LivrosDataService.listar()
-            .then(response => {
-                this.livros = response.data;
-            });
+        this.listar();
     },
     methods: {
+        ...mapActions(["listar", "excluir"]),
         editar(livro) {
             this.$router.push({
                 name: "editar",
@@ -82,13 +75,10 @@ export default {
                     id: livro.id
                 }
             });
-        },
-        excluir(livro) {
-            LivrosDataService.excluir(livro.id)
-                .then(response => {
-                    this.livros = this.livros.filter(l => l.id !== livro.id);
-                });
         }
+    },
+    computed: {
+        ...mapGetters(["livros"])
     }
 };
 

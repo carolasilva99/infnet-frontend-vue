@@ -32,7 +32,7 @@
                     <option>Suspense</option>
                 </select>
             </div>
-            <button @click="adicionar" class="btn btn-success">Adicionar</button>
+            <button @click="adicionarSubmit" class="btn btn-success">Adicionar</button>
         </div>
         <div v-else>
             <div class="alert alert-success">
@@ -43,8 +43,7 @@
 </template>
 
 <script>
-
-import LivrosDataService from "../services/LivrosDataService";
+import { mapActions } from 'vuex';
 
 export default {
     name: "adicionar-livro",
@@ -60,7 +59,8 @@ export default {
         };
     },
     methods: {
-        adicionar() {
+        ...mapActions(["adicionar"]),
+        adicionarSubmit() {
             let data = {
                 titulo: this.livro.titulo,
                 autor: this.livro.autor,
@@ -68,14 +68,8 @@ export default {
                 dataCadastro: new Date()
             };
 
-            LivrosDataService.adicionar(this.livro)
-                .then(response => {
-                    this.livro.id = response.data.id;
-                    this.submitted = true;
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+            this.adicionar(data);
+            this.submitted = true;      
         },
     }
 };
