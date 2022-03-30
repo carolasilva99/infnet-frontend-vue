@@ -44,6 +44,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
     name: "adicionar-livro",
@@ -62,6 +63,7 @@ export default {
         ...mapActions(["adicionar"]),
         adicionarSubmit() {
             let data = {
+                id: uuidv4(),
                 titulo: this.livro.titulo,
                 autor: this.livro.autor,
                 categoria: this.livro.categoria,

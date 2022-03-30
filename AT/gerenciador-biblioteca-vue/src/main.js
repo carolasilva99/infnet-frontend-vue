@@ -2,7 +2,7 @@ import { createApp } from "vue";
 import { createStore } from 'vuex';
 import App from "./App.vue";
 import router from "./router";
-import LivrosDataService from "./services/LivrosDataService";
+import LivrosDataService from "./services/LivrosDataServiceLocalStorage";
 
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -17,7 +17,7 @@ const store = createStore({
         async listar({ commit }) {
             const response = await LivrosDataService.listar();
     
-            commit("setLivros", response.data);    
+            commit("setLivros", response);    
         },
         async excluir({ commit }, id) {
             await LivrosDataService.excluir(id);
@@ -25,15 +25,15 @@ const store = createStore({
         },
         async atualizar({ commit }, livro) {
             const response = await LivrosDataService.atualizar(livro.id, livro);
-            commit("atualizar", response.data);
+            commit("atualizar", response);
         },
         async adicionar({ commit }, livro) {
             const response = await LivrosDataService.adicionar(livro);
-            commit("adicionar", response.data);
+            commit("adicionar", response);
         },
         async buscar({ commit }, id) {
             const response = await LivrosDataService.buscar(id);
-            commit("buscar", response.data);
+            commit("buscar", response);
         }
     },
     getters: {
