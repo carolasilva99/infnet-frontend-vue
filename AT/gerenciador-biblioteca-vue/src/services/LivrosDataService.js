@@ -7,7 +7,7 @@ class LivrosDataService {
     buscar(id) {
         return http.get(`/livros/${id}`);
     }
-    criar(livro) {
+    adicionar(livro) {
         return http.post("/livros", livro);
     }
     atualizar(id, livro) {
