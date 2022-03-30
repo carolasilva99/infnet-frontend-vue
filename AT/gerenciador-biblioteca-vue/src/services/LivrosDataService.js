@@ -13,11 +13,8 @@ class LivrosDataService {
     atualizar(id, livro) {
         return http.put(`/livros/${id}`, livro);
     }
-    deletar(id) {
+    excluir(id) {
         return http.delete(`/livros/${id}`);
-    }
-    deletarTodos() {
-        return http.delete(`/livros`);
     }
 }
 export default new LivrosDataService();
