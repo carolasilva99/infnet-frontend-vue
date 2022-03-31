@@ -93,7 +93,8 @@ export default {
                 };
 
                 this.adicionar(data);
-                this.submitted = true;      
+                this.submitted = true;    
+                this.error = false;  
             }
             else {
                 this.error = true;

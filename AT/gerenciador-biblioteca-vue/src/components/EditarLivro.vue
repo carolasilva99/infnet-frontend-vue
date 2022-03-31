@@ -97,7 +97,8 @@ export default {
         atualizarSubmit() {
             if (this.validaEntradas()) {
                 this.atualizar(this.livro);
-                this.sucesso = true;        
+                this.sucesso = true;  
+                this.error = false;        
             }
             else {
                 this.error = true;
