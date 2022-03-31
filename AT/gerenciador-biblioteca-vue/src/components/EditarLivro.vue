@@ -11,6 +11,16 @@
         </div>
     <div v-if="livro" class="edit-form">
         <div class="form-group">
+            <label for="id">Id</label>
+            <input
+                type="text"
+                class="form-control"
+                id="id"
+                disabled
+                v-model="livro.id"
+            />
+        </div>
+        <div class="form-group">
             <label for="titulo">Título</label>
             <input
                 type="text"
@@ -40,6 +50,16 @@
                 <option value="DRAMA">Drama</option>
                 <option value="SUSPENSE">Suspense</option>
             </select>
+        </div>
+        <div class="form-group">
+            <label for="dataCadastro">Data de cadastro:</label>
+            <input
+                type="text"
+                class="form-control"
+                id="dataCadastro"
+                disabled
+                v-model="livro.dataCadastro"
+            />
         </div>
         <button @click="atualizarSubmit" class="btn btn-success">Atualizar</button>
     </div>
