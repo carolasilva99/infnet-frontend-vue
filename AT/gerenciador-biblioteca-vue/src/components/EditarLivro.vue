@@ -52,6 +52,17 @@
             </select>
         </div>
         <div class="form-group">
+                <label for="sinopse">Sinopse</label>
+                <textarea
+                    type="text"
+                    class="form-control"
+                    id="sinopse"
+                    required
+                    v-model="livro.sinopse"
+                    placeholder="Sinopse do livro"
+                />
+            </div>
+        <div class="form-group">
             <label for="dataCadastro">Data de cadastro:</label>
             <input
                 type="text"
@@ -94,7 +105,7 @@ export default {
             }   
         },
         validaEntradas() {
-            return this.livro.titulo && this.livro.autor && this.livro.categoria;
+            return this.livro.titulo && this.livro.autor && this.livro.categoria && this.livro.sinopse;
         }
     },
     computed: {

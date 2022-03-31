@@ -42,6 +42,17 @@
                     <option value="SUSPENSE">Suspense</option>
                 </select>
             </div>
+            <div class="form-group">
+                <label for="sinopse">Sinopse</label>
+                <textarea
+                    type="text"
+                    class="form-control"
+                    id="sinopse"
+                    required
+                    v-model="livro.sinopse"
+                    placeholder="Sinopse do livro"
+                />
+            </div>
             <button @click="adicionarSubmit" class="btn btn-success">Adicionar</button>
         </div>
     </div>
@@ -59,7 +70,9 @@ export default {
                 id: null,
                 titulo: "",
                 autor: "",
-                categoria: ""
+                categoria: "",
+                dataCadastro: "",
+                sinopse: ""
             },
             submitted: false,
             error: false,
@@ -75,7 +88,8 @@ export default {
                     titulo: this.livro.titulo,
                     autor: this.livro.autor,
                     categoria: this.livro.categoria,
-                    dataCadastro: this.dataFormatada(new Date())
+                    dataCadastro: this.dataFormatada(new Date()),
+                    sinopse: this.livro.sinopse
                 };
 
                 this.adicionar(data);
@@ -95,7 +109,7 @@ export default {
             return dia+"/"+mes+"/"+ano;
         },
         validaEntradas() {
-            return this.livro.titulo && this.livro.autor && this.livro.categoria;
+            return this.livro.titulo && this.livro.autor && this.livro.categoria && this.livro.sinopse;
         }
     }
 };
