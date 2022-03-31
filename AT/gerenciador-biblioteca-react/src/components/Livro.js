@@ -28,7 +28,7 @@ const Livro = ({
                     <div>Id: {id}</div>
                     <div>Autor: {autor}</div>
                     <div>Categoria: {categoria} </div>
-                    <div>Data cadastro: {dataAtualFormatada(new Date(dataCadastro))}</div>
+                    <div>Data cadastro: {dataCadastro}</div>
                 </div>
                 <div className="botoes-livro mt-3">
                     <Button variant="primary" onClick={() => history.push(`/editar/${id}`)}>

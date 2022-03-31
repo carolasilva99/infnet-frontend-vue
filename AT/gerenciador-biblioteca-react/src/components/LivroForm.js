@@ -4,15 +4,25 @@ import { v4 as uuidv4 } from 'uuid';
 
 const LivroForm = (props) => {
     const [livro, setLivro] = useState({
+        id: props.livro ? props.livro.id : uuidv4(),
         nome: props.livro ? props.livro.nome : '',
         autor: props.livro ? props.livro.autor : '',
         categoria: props.livro ? props.livro.categoria : '',
+        sinopse: props.livro ? props.livro.sinopse : '',
         dataCadastro: props.livro ? props.livro.dataCadastro : ''
     });
 
     const [mensagemErro, setMensagemErro] = useState('');
 
-    const { nome, autor, categoria } = livro;
+    const { id, nome, autor, categoria, sinopse, dataCadastro } = livro;
+
+    function dataFormatada(data){
+        const dia  = data.getDate().toString().padStart(2, '0');
+        const mes  = (data.getMonth()+1).toString().padStart(2, '0'); //+1 pois no getMonth Janeiro começa com zero.
+        const ano  = data.getFullYear();
+    
+        return dia+"/"+mes+"/"+ano;
+    }
 
     const handleOnSubmit = (event) => {
         event.preventDefault();
@@ -26,11 +36,12 @@ const LivroForm = (props) => {
 
         if (todosOsCamposPreenchidos) {
             const livro = {
-                id: uuidv4(),
+                id,
                 nome,
                 autor,
                 categoria,
-                dataCadastro: new Date()
+                sinopse,
+                dataCadastro: dataFormatada(new Date())
             };
             props.handleOnSubmit(livro);
 
@@ -80,6 +91,18 @@ const LivroForm = (props) => {
                         onChange={handleInputChange}
                     />
                 </Form.Group>
+                <Form.Group controlId="sinopse">
+                    <Form.Label>Sinopse</Form.Label>
+                    <Form.Control
+                        className="input-control"
+                        as="textarea"
+                        rows="3"
+                        name="sinopse"
+                        value={sinopse}
+                        placeholder="Sinopse"
+                        onChange={handleInputChange}
+                    />
+                </Form.Group>
                 <Form.Group controlId="categoria">
                     <Form.Label>Categoria</Form.Label>
                     <Form.Control as="select"
@@ -94,7 +117,7 @@ const LivroForm = (props) => {
                     </Form.Control>
                 </Form.Group>
                 <Button variant="primary" type="submit" className="submit-btn pull-right">
-                    Cadastrar
+                    {props.livro ? 'Atualizar' : 'Cadastrar'}
                 </Button>
             </Form>
         </Container>
