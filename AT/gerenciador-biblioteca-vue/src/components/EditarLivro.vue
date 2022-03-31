@@ -4,6 +4,11 @@
             Livro atualizado com sucesso!
         </div>
     </div>
+    <div v-if="error">
+            <div class="alert alert-danger">
+                {{ errorMessage }}
+            </div>
+        </div>
     <div v-if="livro" class="edit-form">
         <div class="form-group">
             <label for="titulo">Título</label>
@@ -48,6 +53,8 @@ export default {
     data() {
         return {
             sucesso: true,
+            error: false,
+            errorMessage: "",
         };
     },
     created() {
@@ -57,9 +64,18 @@ export default {
     methods: {
         ...mapActions(["buscar", "atualizar"]),
         atualizarSubmit() {
-            this.atualizar(this.livro);
-            this.sucesso = true;      
+            if (this.validaEntradas()) {
+                this.atualizar(this.livro);
+                this.sucesso = true;        
+            }
+            else {
+                this.error = true;
+                this.errorMessage = "Preencha todos os campos!";
+            }   
         },
+        validaEntradas() {
+            return this.livro.titulo && this.livro.autor && this.livro.categoria;
+        }
     },
     computed: {
         livro: {

@@ -5,6 +5,11 @@
                 Livro adicionado com sucesso!
             </div>
         </div>
+        <div v-if="error">
+            <div class="alert alert-danger">
+                {{ errorMessage }}
+            </div>
+        </div>
         <div>
             <div class="form-group">
                 <label for="titulo">Título</label>
@@ -56,22 +61,31 @@ export default {
                 autor: "",
                 categoria: ""
             },
-            submitted: false
+            submitted: false,
+            error: false,
+            errorMessage: ""
         };
     },
     methods: {
         ...mapActions(["adicionar"]),
         adicionarSubmit() {
-            let data = {
-                id: uuidv4(),
-                titulo: this.livro.titulo,
-                autor: this.livro.autor,
-                categoria: this.livro.categoria,
-                dataCadastro: this.dataFormatada(new Date())
-            };
+            if (this.validaEntradas()) {
+                let data = {
+                    id: uuidv4(),
+                    titulo: this.livro.titulo,
+                    autor: this.livro.autor,
+                    categoria: this.livro.categoria,
+                    dataCadastro: this.dataFormatada(new Date())
+                };
 
-            this.adicionar(data);
-            this.submitted = true;      
+                this.adicionar(data);
+                this.submitted = true;      
+            }
+            else {
+                this.error = true;
+                this.errorMessage = "Preencha todos os campos!";
+            }
+                
         },
         dataFormatada(data){
             const dia  = data.getDate().toString().padStart(2, '0');
@@ -79,6 +93,9 @@ export default {
             const ano  = data.getFullYear();
 
             return dia+"/"+mes+"/"+ano;
+        },
+        validaEntradas() {
+            return this.livro.titulo && this.livro.autor && this.livro.categoria;
         }
     }
 };
