@@ -9,7 +9,8 @@ class LivrosDataService {
         return localStorage.setItem('livros', JSON.stringify([...this.listar(), livro]));
     }
     atualizar(id, livro) {
-        return localStorage.setItem('livros', JSON.stringify(this.listar().map(livro => livro.id == id ? livro = livro : livro)));
+        localStorage.setItem('livros', JSON.stringify(this.listar().map(l => l.id == id ? l = livro : l)));
+        return livro;
     }
     excluir(id) {
         return localStorage.setItem('livros', JSON.stringify(this.listar().filter(livro => livro.id != id)));

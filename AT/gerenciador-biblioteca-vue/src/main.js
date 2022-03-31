@@ -11,24 +11,24 @@ const app = createApp(App);
 
 const store = createStore({
     state: {
-        livros: []
+        livros: [],
+        livroAtual: null,
     },
     actions: {
         async listar({ commit }) {
             const response = await LivrosDataService.listar();
-    
-            commit("setLivros", response);    
+            commit("listar", response);    
         },
         async excluir({ commit }, id) {
-            await LivrosDataService.excluir(id);
+            LivrosDataService.excluir(id);
             commit("excluir", id);
         },
         async atualizar({ commit }, livro) {
-            const response = await LivrosDataService.atualizar(livro.id, livro);
+            const response = LivrosDataService.atualizar(livro.id, livro);
             commit("atualizar", response);
         },
         async adicionar({ commit }, livro) {
-            const response = await LivrosDataService.adicionar(livro);
+            const response = LivrosDataService.adicionar(livro);
             commit("adicionar", response);
         },
         async buscar({ commit }, id) {
@@ -38,17 +38,17 @@ const store = createStore({
     },
     getters: {
         livros: state => state.livros,
-        livro: state => id => state.livros.find(livro => livro.id === id)
+        livro: state => state.livroAtual
     },
     mutations: {
-        setLivros: (state, livros) => (state.livros = livros),
+        listar: (state, livros) => (state.livros = livros),
         excluir: (state, id) => state.livros = state.livros.filter(livro => livro.id !== id),
+        adicionar: (state, livro) => state.livros.push(livro),
+        buscar: (state, livro) => (state.livroAtual = livro),
         atualizar: (state, livro) => {
             const index = state.livros.findIndex(l => l.id === livro.id);
             state.livros.splice(index, 1, livro);
-        },
-        adicionar: (state, livro) => state.livros.push(livro),
-        buscar: (state, livro) => (state.livros = [livro])
+        }
     }
 })
 

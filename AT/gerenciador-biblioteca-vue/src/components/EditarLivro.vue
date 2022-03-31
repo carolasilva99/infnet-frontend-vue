@@ -36,7 +36,7 @@
                 <option value="SUSPENSE">Suspense</option>
             </select>
         </div>
-        <button @click="atualizar(livro.id, livro)" class="btn btn-success">Atualizar</button>
+        <button @click="atualizarSubmit" class="btn btn-success">Atualizar</button>
     </div>
     
 </template>
@@ -45,15 +45,31 @@ import { mapActions, mapGetters } from 'vuex';
 
 export default {
     name: "editar",
+    data() {
+        return {
+            sucesso: true,
+        };
+    },
     created() {
         this.sucesso = false;
-        console.log(this.buscar(this.$route.params.id));
+        this.buscar(this.$route.params.id);
     },
     methods: {
-        ...mapActions(["buscar", "atualizar"])
+        ...mapActions(["buscar", "atualizar"]),
+        atualizarSubmit() {
+            this.atualizar(this.livro);
+            this.sucesso = true;      
+        },
     },
     computed: {
-        ...mapGetters(["livro"])
+        livro: {
+            get() {
+                return this.$store.state.livroAtual;
+            },
+            set(livro) {
+                this.$store.commit("setLivro", livro);
+            }
+        },
     }
 };
 
